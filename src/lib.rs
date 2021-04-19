@@ -1,23 +1,25 @@
 use std::error::Error;
 
+const CONFIG_FILENAME: &str = "~/.config/podcatcher.conf";
+
 pub struct Config {
-    pub test: String,
+    pub filename: String,
 }
 
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &str> {
-        let test = if args.len() > 1 {
+        let filename = if args.len() > 1 {
             args[1].clone()
         } else {
-            String::new()
+            String::from(CONFIG_FILENAME)
         };
 
-        Ok(Config {test})
+        Ok(Config {filename})
     }
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    println!("{:?}", config.test);
+    println!("{:?}", config.filename);
 
     Ok(())
 }
